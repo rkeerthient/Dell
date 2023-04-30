@@ -1,0 +1,122 @@
+import React, { useState } from "react";
+import Product from "../types/products";
+import { CardProps } from "@yext/search-ui-react";
+import StarRating from "./starRating";
+
+const ProductCard = (props: CardProps<Product>) => {
+  const { result } = props;
+  const productRawData = result.rawData;
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div className="grid grid-cols-3 p-6 border space-x-3 my-4 shadow-md">
+      {productRawData.c_images && (
+        <div
+          className="p-12 w-auto "
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {hovered ? (
+            <img src={productRawData.c_images[1]} alt="" className="w-auto" />
+          ) : (
+            <img src={productRawData.c_images[0]} alt="" className="w-auto" />
+          )}
+        </div>
+      )}
+      <div>
+        <div className="flex flex-col">
+          <div className=" text-blue-500	 text-xl font-normal">
+            {result.name}
+          </div>
+          <div className="text-gray-500 text-sm">Order Code {result.id}</div>
+          {productRawData.c_ratingValue && (
+            <div className="text-lg text-blue-500	">
+              <StarRating selectedStars={productRawData.c_ratingValue} />{" "}
+              <span className="text-sm text-black">
+                {" "}
+                {productRawData.c_ratingValue} ({productRawData.c_ratingCount})
+              </span>
+            </div>
+          )}
+          <div className="mt-2 font-bold">
+            Specs{" "}
+            <span className="ml-4 font-normal hover:cursor-pointer hover:underline text-blue-500	 hover:text-blue-800 visited:text-purple-600">
+              Customize
+            </span>
+          </div>
+          <hr className="my-2" />
+          <div className="flex ">
+            <div className="text-gray-500 w-1/4 text-sm">Processor</div>
+            <div className="flex-1">
+              {productRawData.c_processorFull?.split(" (")[0]}
+            </div>
+          </div>
+          <div className="flex ">
+            <div className="text-gray-500 w-1/4 text-sm">OS</div>
+            <div className="flex-1">{productRawData.c_operatingSystem}</div>
+          </div>
+          <div className="flex ">
+            <div className="text-gray-500  w-1/4 text-sm">Graphics</div>
+            <div className="flex-1">{productRawData.c_graphics}</div>
+          </div>
+          <div className="flex ">
+            <div className="text-gray-500  w-1/4 text-sm">Memory</div>
+            <div className="flex-1">
+              {productRawData.c_memorySize} {productRawData.c_memoryType}
+            </div>
+          </div>
+          <div className="flex ">
+            <div className="text-gray-500  w-1/4 text-sm">Storage</div>
+            <div className="flex-1">
+              {productRawData.c_storageSize} {productRawData.c_storageType}
+            </div>
+          </div>
+          <div className="flex ">
+            <div className="text-gray-500  w-1/4 text-sm">Display</div>
+            <div className="flex-1">13.4-in. display Full HD+ (1900X1200)</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="flex flex-col space-y-2 text-sm">
+          <div className="font-bold text-lg">
+            ${productRawData.price?.value?.toLocaleString()}
+          </div>
+          <div className="font-bold">
+            Free 2-Day Delivery
+            <span className="font-normal">
+              {" "}
+              if ordered by 2 PM CT
+              <br />
+              <span className="font-normal text-sm hover:cursor-pointer hover:underline text-blue-500	 hover:text-blue-800 visited:text-purple-600">
+                View Delivery Dates
+              </span>
+            </span>
+          </div>
+          <div className="font-bold text-base">
+            Special Offers{" "}
+            <span className="font-normal text-sm hover:cursor-pointer hover:underline text-blue-500	 hover:text-blue-800 visited:text-purple-600">
+              View All (2)
+            </span>
+          </div>
+          <div className="font-bold text-base">
+            Rewards Up to{" "}
+            <span className="font-normal text-sm">$33.00 back</span>
+          </div>
+          <div className="font-normal text-base">
+            <span className="font-bold">Financing Offers </span>
+            <br />
+            <span className="font-normal text-sm hover:cursor-pointer hover:underline text-blue-500	 hover:text-blue-800 visited:text-purple-600">
+              Learn More{" "}
+            </span>
+            |{" "}
+            <span className="font-normal text-sm hover:cursor-pointer hover:underline text-blue-500	 hover:text-blue-800 visited:text-purple-600">
+              Apply Now
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;

@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.facClass button {
+  @apply px-2;
+}
+
+nav button:disabled {
+  @apply !bg-gray-200 !text-black !border-gray-200;
+}
+nav button:disabled svg {
+  @apply !text-black;
+}
+nav button svg {
+  @apply !text-inherit;
+}
+
+nav {
+  @apply flex gap-x-2;
+}
+
+.searchBar > div {
+  @apply !rounded-none;
+}
