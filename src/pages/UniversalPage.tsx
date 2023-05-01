@@ -2,7 +2,6 @@ import { useSearchActions } from "@yext/search-headless-react";
 import {
   DirectAnswer,
   ResultsCount,
-  SearchBar,
   SpellCheck,
   UniversalResults,
 } from "@yext/search-ui-react";
@@ -61,7 +60,6 @@ export default function UniversalPage(): JSX.Element {
 
   return (
     <div>
-      <SearchBar></SearchBar>
       <SpellCheck />
       <DirectAnswer />
       <ResultsCount />
