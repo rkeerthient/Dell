@@ -11,8 +11,7 @@ import {
   StandardFacets,
 } from "@yext/search-ui-react";
 import { useLayoutEffect } from "react";
-import { CustomCard } from "../components/CustomCard";
-import ProductCard from "../components/ProductCard";
+ import ProductCard from "../components/ProductCard";
 
 export function ProductsPage() {
   const searchActions = useSearchActions();

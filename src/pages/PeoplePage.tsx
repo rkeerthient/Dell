@@ -17,8 +17,7 @@ import {
   NumericalFacets,
   AlternativeVerticals,
 } from "@yext/search-ui-react";
-// import { CustomCard } from '../components/CustomCard';
-
+ 
 const hierarchicalFacetFieldIds = ["c_hierarchicalFacet"];
 const filterSearchFields = [{ fieldApiName: "name", entityType: "ce_person" }];
 const employeeFilterConfigs = [

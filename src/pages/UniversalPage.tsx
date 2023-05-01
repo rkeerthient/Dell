@@ -10,10 +10,7 @@ import {
 } from '@yext/search-ui-react';
 import classNames from 'classnames';
 import { useLayoutEffect } from 'react';
-import { config } from '../config/searchConfig';
-// import { CustomCard } from '../components/CustomCard';
-// import { CustomCard2 } from '../components/CustomCard2';
-// import { CustomSection } from '../components/CustomSection';
+import { config } from '../config/searchConfig'; 
   
 
 const visualAutocompleteConfig: VisualAutocompleteConfig = {
