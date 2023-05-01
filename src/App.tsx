@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AnalyticsProvider } from "@yext/search-ui-react";
 import acquireSessionId from "./utils/acquireSessionId";
 import { config } from "./config/searchConfig";
-import { FAQsPage, HelpArticlesPage } from "./pages/HelpArticlesPage";
+import { HelpArticlesPage } from "./pages/HelpArticlesPage";
 
 const searcher = provideHeadless(config);
 
