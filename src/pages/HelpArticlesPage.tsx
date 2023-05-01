@@ -44,28 +44,8 @@ export function HelpArticlesPage() {
       {/* <SearchBar /> */}
       <div className="flex">
         <div className="w-56 shrink-0 mr-5">
-          <FilterSearch
-            searchFields={filterSearchFields}
-            searchOnSelect={true}
-            label="Filters"
-          />
-          <FilterDivider />
-          <StaticFilters
-            fieldId="c_employeeDepartment"
-            title="Static Employee Department"
-            filterOptions={employeeFilterConfigs}
-          />
-          <StaticFilters
-            fieldId="c_hierarchicalFacet"
-            title="Static Hierarchical Facets"
-            filterOptions={hierarchicalFilterConfigs}
-          />
-          <NumericalFacets />
-          <StandardFacets excludedFieldIds={hierarchicalFacetFieldIds} />
-          <HierarchicalFacets
-            collapsible={true}
-            includedFieldIds={hierarchicalFacetFieldIds}
-          />
+          <StandardFacets />
+
           <br />
           <ApplyFiltersButton />
         </div>

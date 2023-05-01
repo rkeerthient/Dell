@@ -3,13 +3,14 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import HelpArticle from "../types/help_articles";
 import { CardProps } from "@yext/search-ui-react";
 import RTF from "./RTF";
+import { log } from "console";
 
 export default function HelpArticlesCard(props: CardProps<HelpArticle>) {
   const { result } = props;
   const helpArticlesRawData = result.rawData;
+
   return (
     <>
-      {" "}
       {helpArticlesRawData.body && (
         <div className="w-full px-4 pt-2">
           <div className="mx-auto w-full rounded-2xl bg-white p-2">
@@ -27,7 +28,7 @@ export default function HelpArticlesCard(props: CardProps<HelpArticle>) {
                     />
                   </Disclosure.Button>
                   <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                    <RTF>{helpArticlesRawData.body}</RTF>
+                    {helpArticlesRawData.c_cShortRich}
                   </Disclosure.Panel>
                 </>
               )}
