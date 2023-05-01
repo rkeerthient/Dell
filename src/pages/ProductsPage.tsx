@@ -11,7 +11,7 @@ import {
   StandardFacets,
 } from "@yext/search-ui-react";
 import { useLayoutEffect } from "react";
- import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/ProductCard";
 
 export function ProductsPage() {
   const searchActions = useSearchActions();
@@ -22,7 +22,6 @@ export function ProductsPage() {
 
   return (
     <div>
-      {/* <SearchBar /> */}
       <div className="flex">
         <div className="w-64 shrink-0 mr-5">
           <NumericalFacets />

@@ -1,96 +1,71 @@
-import { provideHeadless, useSearchActions } from "@yext/search-headless-react";
+import { useSearchActions } from "@yext/search-headless-react";
 import {
   DirectAnswer,
-  DropdownItem,
   ResultsCount,
   SearchBar,
   SpellCheck,
   UniversalResults,
-  VisualAutocompleteConfig,
 } from "@yext/search-ui-react";
-import classNames from "classnames";
 import { useLayoutEffect } from "react";
-import { config } from "../config/searchConfig";
-
-const visualAutocompleteConfig: VisualAutocompleteConfig = {
-  entityPreviewSearcher: provideHeadless({
-    ...config,
-    headlessId: "visual-autocomplete",
-  }),
-  includedVerticals: ["people"],
-  renderEntityPreviews: (
-    isLoading,
-    verticalKeyToResults,
-    dropdownItemProps
-  ) => {
-    if (!verticalKeyToResults.people) {
-      return null;
-    }
-
-    const { results } = verticalKeyToResults.people;
-    const containerClassName = classNames({
-      "opacity-50": isLoading,
-      "flex ml-4 mt-1": true,
-    });
-
-    return (
-      <div className={containerClassName}>
-        {results.map((r, index) => (
-          <DropdownItem
-            value={r.name ?? ""}
-            key={index + "-" + r.name}
-            className="flex flex-col mb-3 mr-4 border border-gray-200 rounded-md p-3 text-lg hover:bg-gray-100"
-            focusedClassName="flex flex-col mb-3 mr-4 border border-gray-200 rounded-md p-3 text-lg bg-gray-100"
-            {...dropdownItemProps}
-          >
-            {r.name}
-          </DropdownItem>
-        ))}
-      </div>
-    );
-  },
-};
-
-const universalVerticalConfigMap = {
-  people: {},
-};
+import HelpArticlesCard from "../components/HelpArticlesCard";
+import ProductCard from "../components/ProductCard";
 
 const customSearchBarCss = {
   searchBarContainer: "mb-3 text-emerald-800",
+};
+export const GridSection = ({ results, CardComponent, header }: any) => {
+  return (
+    <div className="flex flex-col space-y-2 univ">
+      <div className="flex justify-between">
+        <div className="font-semibold px-32">{header.props.label}</div>
+        <a
+          href={`/${header.props.label.toLowerCase()}`}
+          className="hover:underline "
+          style={{ color: "blue" }}
+        >
+          View All
+        </a>
+      </div>
+      <div
+        style={{
+          marginTop: "2em",
+          display: "grid",
+          gridTemplateColumns: "auto auto auto auto",
+          gap: "2em",
+        }}
+      >
+        {results.map((item: any) => (
+          <ProductCard result={item} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const universalVerticalConfigMap = {
+  products: {
+    CardComponent: ProductCard,
+    label: "Products",
+  },
+  help_articles: {
+    CardComponent: HelpArticlesCard,
+    label: "Help Articles",
+  },
 };
 
 export default function UniversalPage(): JSX.Element {
   const searchActions = useSearchActions();
   useLayoutEffect(() => {
-    searchActions.setUniversal();
     searchActions.executeUniversalQuery();
   });
 
   return (
     <div>
-      {/* <SearchBar
-        visualAutocompleteConfig={visualAutocompleteConfig}
-        customCssClasses={customSearchBarCss}
-      /> */}
+      <SearchBar></SearchBar>
       <SpellCheck />
       <DirectAnswer />
       <ResultsCount />
       <UniversalResults verticalConfigMap={universalVerticalConfigMap} />
-      {/* Test generic result type  */}
-      {/* <UniversalResults
-        verticalConfigMap={{
-          people: {
-            CardComponent: CustomCard,
-            SectionComponent: CustomSection
-          },
-          products: {
-            CardComponent: CustomCard2
-          },
-          links: {
-            SectionComponent: CustomSection
-          }
-        }}
-      /> */}
     </div>
   );
 }
