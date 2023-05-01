@@ -1,4 +1,4 @@
-import { provideHeadless, useSearchActions } from '@yext/search-headless-react';
+import { provideHeadless, useSearchActions } from "@yext/search-headless-react";
 import {
   DirectAnswer,
   DropdownItem,
@@ -6,54 +6,57 @@ import {
   SearchBar,
   SpellCheck,
   UniversalResults,
-  VisualAutocompleteConfig
-} from '@yext/search-ui-react';
-import classNames from 'classnames';
-import { useLayoutEffect } from 'react';
-import { config } from '../config/searchConfig'; 
-  
+  VisualAutocompleteConfig,
+} from "@yext/search-ui-react";
+import classNames from "classnames";
+import { useLayoutEffect } from "react";
+import { config } from "../config/searchConfig";
 
 const visualAutocompleteConfig: VisualAutocompleteConfig = {
   entityPreviewSearcher: provideHeadless({
     ...config,
-    headlessId: 'visual-autocomplete'
+    headlessId: "visual-autocomplete",
   }),
-  includedVerticals: ['people'],
-  renderEntityPreviews: (isLoading, verticalKeyToResults, dropdownItemProps) => {
+  includedVerticals: ["people"],
+  renderEntityPreviews: (
+    isLoading,
+    verticalKeyToResults,
+    dropdownItemProps
+  ) => {
     if (!verticalKeyToResults.people) {
       return null;
     }
 
     const { results } = verticalKeyToResults.people;
     const containerClassName = classNames({
-      'opacity-50': isLoading,
-      'flex ml-4 mt-1': true
+      "opacity-50": isLoading,
+      "flex ml-4 mt-1": true,
     });
 
     return (
       <div className={containerClassName}>
-        {results.map((r, index) =>
+        {results.map((r, index) => (
           <DropdownItem
-            value={r.name ?? ''}
-            key={index + '-' + r.name}
-            className='flex flex-col mb-3 mr-4 border border-gray-200 rounded-md p-3 text-lg hover:bg-gray-100'
-            focusedClassName='flex flex-col mb-3 mr-4 border border-gray-200 rounded-md p-3 text-lg bg-gray-100'
+            value={r.name ?? ""}
+            key={index + "-" + r.name}
+            className="flex flex-col mb-3 mr-4 border border-gray-200 rounded-md p-3 text-lg hover:bg-gray-100"
+            focusedClassName="flex flex-col mb-3 mr-4 border border-gray-200 rounded-md p-3 text-lg bg-gray-100"
             {...dropdownItemProps}
           >
             {r.name}
           </DropdownItem>
-        )}
+        ))}
       </div>
     );
-  }
+  },
 };
 
 const universalVerticalConfigMap = {
-  people: {}
+  people: {},
 };
 
 const customSearchBarCss = {
-  searchBarContainer: 'mb-3 text-emerald-800'
+  searchBarContainer: "mb-3 text-emerald-800",
 };
 
 export default function UniversalPage(): JSX.Element {
@@ -65,16 +68,14 @@ export default function UniversalPage(): JSX.Element {
 
   return (
     <div>
-      <SearchBar
+      {/* <SearchBar
         visualAutocompleteConfig={visualAutocompleteConfig}
         customCssClasses={customSearchBarCss}
-      />
+      /> */}
       <SpellCheck />
       <DirectAnswer />
       <ResultsCount />
-      <UniversalResults
-        verticalConfigMap={universalVerticalConfigMap}
-      />
+      <UniversalResults verticalConfigMap={universalVerticalConfigMap} />
       {/* Test generic result type  */}
       {/* <UniversalResults
         verticalConfigMap={{
