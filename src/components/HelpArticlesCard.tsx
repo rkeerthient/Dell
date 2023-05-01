@@ -27,8 +27,14 @@ export default function HelpArticlesCard(props: CardProps<HelpArticle>) {
                       } h-5 w-5 text-purple-500`}
                     />
                   </Disclosure.Button>
-                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                    {helpArticlesRawData.c_cShortRich}
+                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 flex flex-col">
+                    <RTF>{helpArticlesRawData.c_cShortRich}</RTF>
+                    <a
+                      href={helpArticlesRawData.landingPageUrl}
+                      className="p-4 bg-blue-500 text-white text-center w-fit"
+                    >
+                      Learn more
+                    </a>
                   </Disclosure.Panel>
                 </>
               )}
