@@ -2,39 +2,31 @@ import { useSearchActions } from "@yext/search-headless-react";
 import {
   DirectAnswer,
   ResultsCount,
+  SectionProps,
   SpellCheck,
   UniversalResults,
 } from "@yext/search-ui-react";
 import { useLayoutEffect } from "react";
 import HelpArticlesCard from "../components/HelpArticlesCard";
 import ProductCard from "../components/ProductCard";
+import { VideosCard } from "../components/VideosCard";
 
 const customSearchBarCss = {
   searchBarContainer: "mb-3 text-emerald-800",
 };
-export const GridSection = ({ results, CardComponent, header }: any) => {
+const GridSection = ({ results, CardComponent, header }: SectionProps) => {
+  console.log(header);
+
+  if (!CardComponent) {
+    return <div>Missing Card Component</div>;
+  }
+
   return (
-    <div className="flex flex-col space-y-2 univ">
-      <div className="flex justify-between">
-        <div className="font-semibold px-32">{header.props.label}</div>
-        <a
-          href={`/${header.props.label.toLowerCase()}`}
-          className="hover:underline "
-          style={{ color: "blue" }}
-        >
-          View All
-        </a>
-      </div>
-      <div
-        style={{
-          marginTop: "2em",
-          display: "grid",
-          gridTemplateColumns: "auto auto auto auto",
-          gap: "2em",
-        }}
-      >
-        {results.map((item: any) => (
-          <ProductCard result={item} />
+    <div>
+      <div>{header}</div>
+      <div className="grid grid-cols-4 gap-8">
+        {results.map((r) => (
+          <CardComponent result={r} key={r.id} />
         ))}
       </div>
     </div>
@@ -50,6 +42,12 @@ const universalVerticalConfigMap = {
     CardComponent: HelpArticlesCard,
     label: "Help Articles",
   },
+  videos: {
+    SectionComponent: GridSection,
+    CardComponent: VideosCard,
+    label: "Videos",
+    viewAllButton: true,
+  },
 };
 
 export default function UniversalPage(): JSX.Element {
@@ -59,11 +57,30 @@ export default function UniversalPage(): JSX.Element {
   });
 
   return (
-    <div>
+    <div className="px-12">
       <SpellCheck />
       <DirectAnswer />
       <ResultsCount />
-      <UniversalResults verticalConfigMap={universalVerticalConfigMap} />
+      <UniversalResults
+        verticalConfigMap={{
+          products: {
+            CardComponent: ProductCard,
+            label: "Products",
+            viewAllButton: true,
+          },
+          help_articles: {
+            CardComponent: HelpArticlesCard,
+            label: "Help Articles",
+            viewAllButton: true,
+          },
+          videos: {
+            SectionComponent: GridSection,
+            CardComponent: VideosCard,
+            label: "Videos",
+            viewAllButton: true,
+          },
+        }}
+      />
     </div>
   );
 }

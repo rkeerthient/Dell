@@ -12,7 +12,6 @@ export function VideosCard(props: CardProps<Ce_videos>): JSX.Element {
     height: "270",
     width: "380",
   };
-  console.log(JSON.stringify(result));
 
   const _onReady = (e: any) => {
     e.target.pauseVideo();
