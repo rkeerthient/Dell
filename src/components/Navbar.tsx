@@ -115,6 +115,9 @@ export function Navbar() {
         <Link className="text-black hover:bg-gray-100  p-2" to="./products">
           Products Page
         </Link>
+        <Link className="text-black hover:bg-gray-100  p-2" to="./videos">
+          Support Videos
+        </Link>
       </nav>
       <hr className="my-4" />
     </>

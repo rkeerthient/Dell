@@ -12,6 +12,7 @@ import { AnalyticsProvider } from "@yext/search-ui-react";
 import acquireSessionId from "./utils/acquireSessionId";
 import { config } from "./config/searchConfig";
 import { HelpArticlesPage } from "./pages/HelpArticlesPage";
+import { VideosPage } from "./pages/VideosPage";
 
 const searcher = provideHeadless(config);
 
@@ -31,6 +32,7 @@ function App() {
               <Route path="help_articles" element={<HelpArticlesPage />} />
               <Route path="products" element={<ProductsPage />} />
               <Route path="locations" element={<LocationsPage />} />
+              <Route path="videos" element={<VideosPage />} />
             </Routes>
           </BrowserRouter>
         </AnalyticsProvider>
