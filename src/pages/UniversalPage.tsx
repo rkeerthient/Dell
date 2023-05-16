@@ -14,9 +14,7 @@ import { VideosCard } from "../components/VideosCard";
 const customSearchBarCss = {
   searchBarContainer: "mb-3 text-emerald-800",
 };
-const GridSection = ({ results, CardComponent, header }: SectionProps) => {
-  console.log(header);
-
+const GridSection = ({ results, CardComponent, header }: any) => {
   if (!CardComponent) {
     return <div>Missing Card Component</div>;
   }
