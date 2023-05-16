@@ -13,7 +13,9 @@ export function VideosPage() {
 
   useLayoutEffect(() => {
     searchActions.setVertical("videos");
-    searchActions.executeVerticalQuery();
+    searchActions
+      .executeVerticalQuery()
+      .then((res) => console.log(JSON.stringify(res)));
   });
 
   return (
