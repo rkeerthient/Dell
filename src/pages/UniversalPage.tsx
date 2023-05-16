@@ -23,7 +23,7 @@ const GridSection = ({ results, CardComponent, header }: any) => {
     <div>
       <div>{header}</div>
       <div className="grid grid-cols-4 gap-8">
-        {results.map((r) => (
+        {results.map((r: any) => (
           <CardComponent result={r} key={r.id} />
         ))}
       </div>
