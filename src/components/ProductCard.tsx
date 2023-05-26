@@ -10,7 +10,7 @@ const ProductCard = (props: CardProps<Product>) => {
   console.log();
 
   return (
-    <div className="grid grid-cols-3 p-6 border space-x-3 my-4 shadow-md">
+    <div className="grid grid-cols-3 p-6 border space-x-3 space-y-2 my-4 shadow-md">
       {productRawData.c_images && (
         <div
           className="p-12 w-auto my-auto"
@@ -26,10 +26,21 @@ const ProductCard = (props: CardProps<Product>) => {
       )}
       <div>
         <div className="flex flex-col">
-          <div className=" text-blue-500	 text-xl font-normal">
-            {result.name}
+          <div className=" text-blue-500 text-xl font-normal">
+            <a href={productRawData.landingPageUrl}>{result.name}</a>
           </div>
-          <div className="text-gray-500 text-sm">Order Code {result.id}</div>
+          {productRawData.c_type != "Monitors" ? (
+            <div className="text-gray-500 text-sm">Order Code {result.id}</div>
+          ) : (
+            <div className="flex flex-col">
+              <div className="text-gray-500 text-sm">
+                {productRawData.c_manufacturerPart}
+              </div>
+              <div className="text-gray-500 text-sm">
+                {productRawData.c_dellPart}
+              </div>
+            </div>
+          )}
           {productRawData.c_ratingValue && (
             <div className="text-lg text-blue-500	">
               <StarRating selectedStars={productRawData.c_ratingValue} />{" "}
