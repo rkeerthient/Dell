@@ -1,4 +1,4 @@
-import { useSearchActions } from "@yext/search-headless-react";
+import { useSearchActions, useSearchState } from "@yext/search-headless-react";
 import {
   AppliedFilters,
   ResultsCount,
@@ -21,8 +21,10 @@ export type MyComponentProps = {
 
 export function ProductsPage() {
   const searchActions = useSearchActions();
-
+  const { promoData, setPromoData } = useMyContext();
+  const query = useSearchState((state) => state.query.input);
   useLayoutEffect(() => {
+    !query && promoData && setPromoData([]);
     searchActions.setVertical("products");
     searchActions.executeVerticalQuery();
   }, []);
