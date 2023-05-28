@@ -3,7 +3,7 @@ import Product from "../types/products";
 import { CardProps } from "@yext/search-ui-react";
 import StarRating from "./starRating";
 
-const ProductCard = (props: CardProps<Product>) => {
+const ProductCard = (props: any) => {
   const { result } = props;
   const productRawData = result.rawData;
   const [hovered, setHovered] = useState(false);

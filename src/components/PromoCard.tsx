@@ -7,9 +7,8 @@ import Ce_videos from "../types/videos";
 import YouTube from "react-youtube";
 import { ArrowRightIcon, CheckCircleIcon } from "@heroicons/react/20/solid";
 
-export function PromoCard(props: CardProps<any>): JSX.Element {
+export function PromoCard(props: any): JSX.Element {
   const { result } = props;
-  console.log(JSON.stringify(result));
   const dummyList = [
     "No interest if paid in full within 6 months on Purchases $299 or more",
     "No interest if paid in full within 12 months on Purchases $899 or more",
