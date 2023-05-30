@@ -1,39 +1,25 @@
 import { useLayoutEffect } from "react";
-import { useSearchActions } from "@yext/search-headless-react";
+import { useSearchActions, useSearchState } from "@yext/search-headless-react";
 import {
   AppliedFilters,
-  FilterSearch,
   ResultsCount,
-  SearchBar,
-  StandardCard,
   VerticalResults,
   LocationBias,
-  StaticFilters,
   StandardFacets,
-  HierarchicalFacets,
-  FilterDivider,
   ApplyFiltersButton,
   Pagination,
-  NumericalFacets,
   AlternativeVerticals,
 } from "@yext/search-ui-react";
-import FAQCard from "../components/HelpArticlesCard";
 import HelpArticlesCard from "../components/HelpArticlesCard";
- 
+
 const hierarchicalFacetFieldIds = ["c_hierarchicalFacet"];
-const filterSearchFields = [{ fieldApiName: "name", entityType: "ce_person" }];
-const employeeFilterConfigs = [
-  { value: "Consulting" },
-  { value: "Technology" },
-];
-const hierarchicalFilterConfigs = [{ value: "Computer & Tablets" }];
-const alternativeVerticalsConfigMap = {
-  products: { label: "Products" },
-};
 
 export function HelpArticlesPage() {
   const searchActions = useSearchActions();
+  const query = useSearchState((state) => state.query.input);
+
   useLayoutEffect(() => {
+    query && searchActions.setQuery(query);
     searchActions.setVertical("help_articles");
     searchActions.executeVerticalQuery();
   });

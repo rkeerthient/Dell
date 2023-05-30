@@ -25,6 +25,7 @@ export function ProductsPage() {
   const query = useSearchState((state) => state.query.input);
   useLayoutEffect(() => {
     !query && promoData && setPromoData([]);
+    query && searchActions.setQuery(query);
     searchActions.setVertical("products");
     searchActions.executeVerticalQuery();
   }, []);

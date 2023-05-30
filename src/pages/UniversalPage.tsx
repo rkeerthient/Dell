@@ -1,4 +1,4 @@
-import { useSearchActions } from "@yext/search-headless-react";
+import { useSearchActions, useSearchState } from "@yext/search-headless-react";
 import {
   DirectAnswer,
   ResultsCount,
@@ -68,7 +68,10 @@ const universalVerticalConfigMap = {
 
 export default function UniversalPage(): JSX.Element {
   const searchActions = useSearchActions();
+  const query = useSearchState((state) => state.query.input);
   useLayoutEffect(() => {
+    query && searchActions.setQuery(query);
+    searchActions.setUniversal();
     searchActions.executeUniversalQuery();
   });
 

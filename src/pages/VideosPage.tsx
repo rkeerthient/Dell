@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { useSearchActions } from "@yext/search-headless-react";
+import { useSearchActions, useSearchState } from "@yext/search-headless-react";
 import {
   ResultsCount,
   VerticalResults,
@@ -10,8 +10,10 @@ import { VideosCard } from "../components/VideosCard";
 
 export function VideosPage() {
   const searchActions = useSearchActions();
+  const query = useSearchState((state) => state.query.input);
 
   useLayoutEffect(() => {
+    query && searchActions.setQuery(query);
     searchActions.setVertical("videos");
     searchActions.executeVerticalQuery();
   });
