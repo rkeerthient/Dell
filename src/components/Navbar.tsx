@@ -17,11 +17,17 @@ import Product from "../types/products";
 import classNames from "classnames";
 import { useMyContext } from "../context/context";
 import { useState } from "react";
+import SpeechToText from "./SpeechToText";
 
 export function Navbar() {
   const { setPromoData, setCustLoad } = useMyContext();
   const [vertKey, setVertKey] = useState("");
-
+  const handleDataFromChild = (data: any, listenStatus: any) => {
+    data && searchActions.setQuery(data);
+    !listenStatus && currKey === undefined
+      ? searchActions.executeUniversalQuery()
+      : searchActions.executeVerticalQuery();
+  };
   let currKey = useSearchState((state) => state.vertical.verticalKey);
   let searchActions = useSearchActions();
 
@@ -117,27 +123,32 @@ export function Navbar() {
           alt=""
           className=" w-48 h-auto mr-8"
         />
-        {currKey === undefined || currKey === "products" ? (
-          <SearchBar
-            visualAutocompleteConfig={{
-              entityPreviewSearcher: entityPreviewSearcher,
-              includedVerticals: ["products"],
-              renderEntityPreviews: renderEntityPreviews,
-              universalLimit: { products: 4 },
-              entityPreviewsDebouncingTime: 500,
-            }}
-            customCssClasses={{
-              searchBarContainer: "w-2/3 searchBar",
-            }}
-            onSearch={handleSearch1}
-          ></SearchBar>
-        ) : (
-          <SearchBar
-            customCssClasses={{
-              searchBarContainer: "   w-2/3 searchBar",
-            }}
-          ></SearchBar>
-        )}
+        <div className="flex w-full items-center gap-4">
+          {currKey === undefined || currKey === "products" ? (
+            <SearchBar
+              visualAutocompleteConfig={{
+                entityPreviewSearcher: entityPreviewSearcher,
+                includedVerticals: ["products"],
+                renderEntityPreviews: renderEntityPreviews,
+                universalLimit: { products: 4 },
+                entityPreviewsDebouncingTime: 500,
+              }}
+              customCssClasses={{
+                searchBarContainer: "w-2/3 searchBar",
+              }}
+              onSearch={handleSearch1}
+            ></SearchBar>
+          ) : (
+            <SearchBar
+              customCssClasses={{
+                searchBarContainer: "   w-2/3 searchBar",
+              }}
+            ></SearchBar>
+          )}
+          <div className="w-fit">
+            <SpeechToText sendDataToParent={handleDataFromChild}></SpeechToText>
+          </div>
+        </div>
       </div>
 
       <nav className="flex flex-row">

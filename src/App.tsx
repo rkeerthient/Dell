@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime";
 import {
   provideHeadless,
   SearchHeadlessProvider,
@@ -15,6 +16,7 @@ import { VideosPage } from "./pages/VideosPage";
 import { MyContextProvider } from "./context/context";
 import { ProductsPage } from "./pages/ProductsPage";
 import { ProductsPageWrapper } from "./pages/ProductsPageWrapper";
+import SpeechToText from "./components/SpeechToText";
 
 const searcher = provideHeadless(config);
 

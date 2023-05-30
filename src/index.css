@@ -37,3 +37,7 @@ nav {
 .searchBar > div {
   @apply !rounded-none;
 }
+
+.searchBar {
+  @apply !mb-0;
+}
